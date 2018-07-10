@@ -35,11 +35,13 @@ var protocolRegExp = /^https?:\/\/(.*)/i;
 // Regex para patrones del estilo xxxx.xxxx.xxxx.
 var hostnameRegExp = /^([a-z0-9\-_]+\.)+[a-z0-9\-_]+/i;
 
+var barRegExp = /\/$/i;
+
 
 exports.addUrl = function (req, res) {
-    console.log(req);
     var url = req.body.url;
 
+    // Comprueba si es una URL completa valida
     var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
     var regex = new RegExp(expression); 
 
@@ -49,7 +51,7 @@ exports.addUrl = function (req, res) {
     }
 
     // "www.example.com/test/" and "www.example.com/test" are the same URL
-    if (url.match(/\/$/i))
+    if (url.match(barRegExp))
         url = url.slice(0, -1);
 
     var protocolMatch = url.match(protocolRegExp);
