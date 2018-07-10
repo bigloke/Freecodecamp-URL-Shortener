@@ -12,7 +12,7 @@ var urlHandler = require('./controllers/urlHandler.js');
 var app = express();
 
 // Basic Configuration for Heroku
-var mongoURL = 'mongodb://bigloke:loke69@ds131137.mlab.com:31137/bigmongo';
+var mongoURL = process.env.MONGOLAB_URI;
 var port = process.env.PORT || 3000;
 
 mongoose.connect(mongoURL);
